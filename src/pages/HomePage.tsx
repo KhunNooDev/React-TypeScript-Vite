@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux'
-import { Paper, FormGroup, FormControlLabel, Switch, Typography } from '@mui/material'
+import { Paper, FormGroup, FormControlLabel, Switch, Typography, Link } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
+
 import { asyncToggleTheme } from '../redux/theme/themeSlice'
 // get theme from store
 import { getDarkThemeState } from '../redux/theme/selectors'
@@ -35,6 +37,12 @@ export default function App() {
       <Typography variant='h1' className='testcss'>
         It's Blue
       </Typography>
+      <Link component={RouterLink} to='/signin' variant='body2'>
+        SignIn
+      </Link>
+      <Link component={RouterLink} to='/signup' variant='body2'>
+        SignUp
+      </Link>
     </Paper>
   )
 }

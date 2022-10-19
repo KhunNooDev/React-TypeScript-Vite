@@ -4,7 +4,8 @@ import { Route, Routes } from 'react-router-dom'
 import { HomeOutlined, HandymanOutlined } from '@mui/icons-material'
 
 import HomePage from './pages/HomePage'
-import Test from './pages/Test'
+import SignUp from './pages/SignUp'
+import SignIn from './pages/SignIn'
 
 export default function App() {
   return (
@@ -21,16 +22,22 @@ export default function App() {
 export function navigation() {
   return [
     {
+      title: 'SignUp',
+      icon: <HandymanOutlined />,
+      element: <SignUp />,
+      path: '/signup',
+    },
+    {
+      title: 'SignIn',
+      icon: <HandymanOutlined />,
+      element: <SignIn />,
+      path: '/signin',
+    },
+    {
       title: 'Dashboard',
       icon: <HomeOutlined />,
       element: <HomePage />,
       path: '/',
-    },
-    {
-      title: 'Account Settings',
-      icon: <HandymanOutlined />,
-      element: <Test />,
-      path: '/test',
     },
   ]
 }

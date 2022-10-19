@@ -1,9 +1,11 @@
 import { AnyAction, createSlice } from '@reduxjs/toolkit'
 
+const isDarkTheme = !!JSON.parse(localStorage.getItem('darkTheme') || 'false')
+
 export const themeSlice = createSlice({
   name: 'theme',
   initialState: {
-    darkTheme: !!JSON.parse(localStorage.getItem('darkTheme') || 'false'),
+    darkTheme: isDarkTheme,
   },
   reducers: {
     toggleTheme: (state) => {
@@ -13,7 +15,6 @@ export const themeSlice = createSlice({
 })
 
 export function asyncToggleTheme(): AnyAction {
-  const isDarkTheme = !!JSON.parse(localStorage.getItem('darkTheme') || 'false')
   localStorage.setItem('darkTheme', String(!isDarkTheme))
   return toggleTheme()
 }
