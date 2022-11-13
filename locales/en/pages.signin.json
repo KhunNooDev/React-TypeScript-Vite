@@ -1,0 +1,11 @@
+{
+  "title": "Sign In",
+  "btn_submit": "Sign In",
+  "email": "Email Address",
+  "password": "Password",
+  "cb_remember": "Remember me",
+  "buttons": {
+    "ok": "Ok in sing in",
+    "cancel": "Cancel in sing in"
+  }
+}

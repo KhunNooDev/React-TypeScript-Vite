@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import GlobalStyling from './globalStyles'
 import { DefaultPalette } from './palette'
 
-import { getDarkThemeState } from '../redux/theme/selectors'
+import { getDarkThemeState } from '../redux/selector'
 
 type Props = {
   children: React.ReactNode

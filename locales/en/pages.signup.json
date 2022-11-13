@@ -1,0 +1,9 @@
+{
+  "title": "Sign Up",
+  "btn_submit": "Sign Up",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "Email Address",
+  "password": "Password",
+  "cb_get_promotions": "I want to receive inspiration, marketing promotions and updates via email."
+}

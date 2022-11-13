@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { HomeOutlined, HandymanOutlined } from '@mui/icons-material'
 
-import HomePage from './pages/HomePage'
-import SignUp from './pages/SignUp'
-import SignIn from './pages/SignIn'
+import { HomePage, SignUp, SignIn } from 'pages'
+
+import { customTranslation } from './i18n'
 
 export default function App() {
   return (
@@ -20,21 +20,22 @@ export default function App() {
 }
 
 export function navigation() {
+  const { t } = customTranslation()
   return [
     {
-      title: 'SignUp',
+      title: t('navigation.SignUp'),
       icon: <HandymanOutlined />,
       element: <SignUp />,
       path: '/signup',
     },
     {
-      title: 'SignIn',
+      title: t('navigation.SignIn'),
       icon: <HandymanOutlined />,
       element: <SignIn />,
       path: '/signin',
     },
     {
-      title: 'Dashboard',
+      title: t('navigation.Dashboard'),
       icon: <HomeOutlined />,
       element: <HomePage />,
       path: '/',

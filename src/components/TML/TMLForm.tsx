@@ -1,5 +1,6 @@
 import React from 'react'
-import { Controller, ControllerProps, SubmitHandler, useForm } from 'react-hook-form'
+import { Link as RouterLink } from 'react-router-dom'
+import { Controller, useForm } from 'react-hook-form'
 import {
   Avatar,
   Box,
@@ -8,37 +9,60 @@ import {
   Container,
   FormControlLabel,
   Grid,
-  GridSize,
   TextField,
-  TextFieldProps,
   Typography,
   Link,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+  FormControl,
 } from '@mui/material'
-import { Link as RouterLink, To } from 'react-router-dom'
 import { LockOutlined } from '@mui/icons-material'
 
-type children = Exclude<React.ReactNode, null | undefined>
-interface PropsForm {
-  header?: String
-  children: any //i don't know type
-  submit?: String
-  linkl?: {
-    to: To
-    txt: String
-  }
-  linkr?: {
-    to: To
-    txt: String
-  }
-  defaultValues?: object
-  onSubmit: SubmitHandler<object>
-}
+import { isString } from 'utils/UtilsData'
+import { customTranslation } from 'i18n'
+import { PropsForm, PropsInput, PropsSelect } from './types'
 
 export default function Form(props: PropsForm) {
-  const { defaultValues, children, onSubmit } = props
+  const { namespace, defaultValues, children, onSubmit } = props
+  const { t } = customTranslation(namespace)
 
   const { handleSubmit, control } = useForm({ defaultValues })
 
+  const childrenMap = (
+    <>
+      {Array.isArray(children)
+        ? children.map((child) => {
+            return child.props
+              ? child.props.name
+                ? React.createElement(child.type, {
+                    ...{
+                      key: child.props.name,
+                      ...child.props,
+                      control,
+                      namespace,
+                      t,
+                    },
+                  })
+                : child
+              : child
+          })
+        : children.props
+        ? children.props.name
+          ? React.createElement(children.type, {
+              ...{
+                key: children.props.name,
+                ...children.props,
+                control,
+                namespace,
+                t,
+              },
+            })
+          : children
+        : children}
+    </>
+  )
   return (
     <>
       <Container component='main' maxWidth='xs'>
@@ -56,41 +80,18 @@ export default function Form(props: PropsForm) {
                 <LockOutlined />
               </Avatar>
               <Typography component='h1' variant='h5'>
-                {props.header}
+                {!!namespace ? t('title') : isString(props.header) ? props.header : 'Title'}
               </Typography>
             </>
           )}
           <Box component='form' noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {Array.isArray(children)
-                ? children.map((child) => {
-                    return child.props
-                      ? child.props.name
-                        ? React.createElement(child.type, {
-                            ...{
-                              key: child.props.name,
-                              ...child.props,
-                              control,
-                            },
-                          })
-                        : child
-                      : child
-                  })
-                : children.props
-                ? children.props.name
-                  ? React.createElement(children.type, {
-                      ...{
-                        key: children.props.name,
-                        ...children.props,
-                        control,
-                      },
-                    })
-                  : children
-                : children}
+              {childrenMap}
             </Grid>
             {!!props.submit && (
               <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-                {props.submit}
+                {/* {props.submit} */}
+                {!!namespace ? t('btn_submit') : isString(props.submit) ? props.submit : 'Submit'}
               </Button>
             )}
 
@@ -117,13 +118,6 @@ export default function Form(props: PropsForm) {
   )
 }
 
-type PropsInput = {
-  xs?: GridSize
-  sm?: GridSize
-  required?: boolean | string
-} & Omit<ControllerProps, 'render'> &
-  Omit<TextFieldProps, 'required'>
-
 export function InputText(props: PropsInput) {
   return (
     <Grid item xs={props.xs || 12} sm={props.sm || 6}>
@@ -135,7 +129,8 @@ export function InputText(props: PropsInput) {
           <TextField
             id={props.id || props.name}
             name={props.name}
-            label={props.label || props.name}
+            label={!!props.label ? props.label : !!props.namespace ? props.t && props.t(props.name) : props.name}
+            // label={props.label || props.name}
             value={value || ''}
             onChange={onChange}
             fullWidth
@@ -163,7 +158,8 @@ export function InputPass(props: PropsInput) {
             type='password'
             id={props.id || props.name}
             name={props.name}
-            label={props.label || props.name}
+            label={!!props.label ? props.label : !!props.namespace ? props.t && props.t(props.name) : props.name}
+            // label={props.label || props.name}
             value={value || ''}
             onChange={onChange}
             fullWidth
@@ -196,7 +192,8 @@ export function InputCheckbox(props: PropsInput) {
                 color='primary'
               />
             }
-            label={props.label || props.name}
+            label={!!props.label ? props.label : !!props.namespace ? props.t && props.t(props.name) : props.name}
+            // label={props.label || props.name}
           />
         )}
       />
@@ -204,12 +201,42 @@ export function InputCheckbox(props: PropsInput) {
   )
 }
 
-// export function Select({ register, options, name, ...rest }) {
-//   return (
-//     <select {...register(name)} {...rest}>
-//       {options.map((value) => (
-//         <option value={value}>{value}</option>
-//       ))}
-//     </select>
-//   );
-// }
+export function InputSelect(props: PropsSelect) {
+  const labelId = `${props.name}-label`
+  return (
+    <Grid item xs={props.xs || 12} sm={props.sm || 6}>
+      <Controller
+        control={props.control}
+        name={props.name}
+        rules={{ required: props.required }}
+        render={({ field: { onChange, onBlur, value, ref }, fieldState: { error } }) => (
+          <FormControl fullWidth error={!!error} required={!!props.required}>
+            <InputLabel id={labelId}>{props.label}</InputLabel>
+            <Select
+              labelId={labelId}
+              id={props.id || props.name}
+              name={props.name}
+              label={!!props.label ? props.label : !!props.namespace ? props.t && props.t(props.name) : props.name}
+              // label={props.label || props.name}
+              value={value || ''}
+              onChange={onChange}
+              // helperText={error ? error.message : null}
+              autoComplete={props.autoComplete || props.name}
+              autoFocus={props.autoFocus}
+            >
+              {!!props.showClear && (
+                <MenuItem value=''>
+                  <em>{isString(props.showClear) ? props.showClear : 'None'}</em>
+                </MenuItem>
+              )}
+              {props.menus.map((menu) => (
+                <MenuItem value={menu.key}>{menu.value}</MenuItem>
+              ))}
+            </Select>
+            {error && <FormHelperText>{error.message}</FormHelperText>}
+          </FormControl>
+        )}
+      />
+    </Grid>
+  )
+}

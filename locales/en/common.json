@@ -1,0 +1,11 @@
+{
+  "navigation": {
+    "SignUp": "SignUp",
+    "SignIn": "SignIn",
+    "Dashboard": "Dashboard"
+  },
+  "buttons": {
+    "ok": "Ok",
+    "cancel": "Cancel"
+  }
+}

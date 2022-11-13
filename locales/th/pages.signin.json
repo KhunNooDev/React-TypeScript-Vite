@@ -1,0 +1,11 @@
+{
+  "title": "เข้าสู่ระบบ",
+  "btn_submit": "เข้าสู่ระบบ",
+  "email": "ที่อยู่อีเมล",
+  "password": "รหัสผ่าน",
+  "cb_remember": "จำไว้นะ",
+  "buttons": {
+    "ok": "Ok นะ ใน singin",
+    "cancel": "Cancel จ๊ะ ใน singin"
+  }
+}

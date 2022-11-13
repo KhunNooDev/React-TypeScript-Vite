@@ -1,14 +1,21 @@
 import { useDispatch } from 'react-redux'
-import { Paper, FormGroup, FormControlLabel, Switch, Typography, Link } from '@mui/material'
+import { Paper, FormGroup, FormControlLabel, Switch, Typography, Link, Button } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
+import { useTranslation, Trans } from 'react-i18next'
 
-import { asyncToggleTheme } from '../redux/theme/themeSlice'
+import { customTranslation, namespaces } from 'i18n'
+
 // get theme from store
-import { getDarkThemeState } from '../redux/theme/selectors'
+import { getDarkThemeState } from 'redux/selector'
+import { asyncToggleTheme } from 'redux/theme/themeSlice'
+import { useEffect } from 'react'
+import { Namespace } from 'i18next'
 
-export default function App() {
+export const HomePage = () => {
   // initialize dispatch variable
   const dispatch = useDispatch()
+
+  const { t, changeLanguage } = customTranslation(namespaces.pages.hello)
 
   // ToggleSwitch component
   const ToggleSwitch = () => {
@@ -37,6 +44,15 @@ export default function App() {
       <Typography variant='h1' className='testcss'>
         It's Blue
       </Typography>
+      <h1>1{t('welcome')}</h1> {/*namespaces.pages.hello */}
+      <h2>2{t('buttons.ok')}</h2> {/*namespaces.pages.hello */}
+      <h2>3{t('buttons.ok', true)}</h2> {/*namespaces.common */}
+      <h2>{t('buttons.ok', false)}</h2> {/*namespaces.common */}
+      <h2>{t('title', false, namespaces.pages.signin)}</h2> {/*namespaces.pages.signin */}
+      <h2>{t('title', false, namespaces.pages.signup)}</h2> {/*namespaces.pages.signup */}
+      {/* <h2>{t('buttons.ok', namespaces.pages.signin)}</h2> namespaces.signin */}
+      <Button onClick={changeLanguage('en')}>en</Button>
+      <Button onClick={changeLanguage('th')}>th</Button>
       <Link component={RouterLink} to='/signin' variant='body2'>
         SignIn
       </Link>

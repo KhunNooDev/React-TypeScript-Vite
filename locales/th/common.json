@@ -1,0 +1,11 @@
+{
+  "navigation": {
+    "SignUp": "สมัครสมาชิก",
+    "SignIn": "เข้าสู่ระบบ",
+    "Dashboard": "รายงาน"
+  },
+  "buttons": {
+    "ok": "ตกลง",
+    "cancel": "ยกเลิก"
+  }
+}

@@ -1,27 +1,26 @@
 import React from 'react'
-import Form, { InputText, InputPass, InputCheckbox } from '../components/TML/TMLForm'
+import Form, { InputText, InputPass, InputCheckbox } from 'components/TML/TMLForm'
+import { namespaces } from 'i18n'
 
-export default function SignUp() {
+export const SignUp = () => {
   const onSubmit = (data: object) => console.log(data)
   return (
     <>
       <Form
-        header='Sign up'
-        submit='Sign up'
+        namespace={namespaces.pages.signup}
+        header //={t('title')}
+        submit //={t('btn_submit')}
         onSubmit={onSubmit}
         linkr={{ to: '/signin', txt: 'Already have an account? Sign in' }}
       >
-        <InputText name='firstName' label='First Name' required autoFocus />
-        <InputText name='lastName' label='Last Name' required />
-        <InputText name='email' label='Email Address' sm={12} />
-        <InputPass name='password' label='Password' sm={12} />
+        <InputText name='firstName' required autoFocus />
+        <InputText name='lastName' required />
+        <InputText name='email' sm={12} />
+        <InputPass name='password' sm={12} />
         {/* <Grid item xs={12} sm={6}>
           other
         </Grid> */}
-        <InputCheckbox
-          name='cb_get_promotions'
-          label='I want to receive inspiration, marketing promotions and updates via email.'
-        />
+        <InputCheckbox name='cb_get_promotions' />
       </Form>
     </>
   )
