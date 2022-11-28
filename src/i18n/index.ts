@@ -38,18 +38,22 @@ export const i18n = createI18n(language) //(languages.th)
 
 export function customTranslation(dns?: Namespace) {
   // dns => default namespace
-  const { t: trans, i18n } = useTranslation(dns)
+  const { t: trans, i18n } = useTranslation(dns || namespaces.common)
 
   const t = (key: string, isCommon?: boolean, ns?: Namespace) => {
     // return trans<string>(key, { ns: namespaces.pages.signin })
     return isCommon ? trans<string>(key, { ns: namespaces.common }) : trans<string>(key, { ns: ns })
   }
-  const changeLanguage = (language: string) => () => {
+  const changeLanguage = (language: string) => {
     i18n.changeLanguage(language)
     localStorage.setItem('language', language)
   }
+  const getLanguage = () => {
+    const language = localStorage.getItem('language')
+    return language
+  }
 
-  return { t, changeLanguage }
+  return { t, changeLanguage, getLanguage }
 }
 
 export * from './i18n.constants'

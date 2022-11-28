@@ -1,36 +1,31 @@
-import React, { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React from 'react'
+import { HomeOutlined, PersonAddAltOutlined, LoginOutlined } from '@mui/icons-material'
 
-import { HomeOutlined, HandymanOutlined } from '@mui/icons-material'
-
+import ThemeComponent from 'theme/ThemeComponent'
+import { customTranslation } from 'i18n'
 import { HomePage, SignUp, SignIn } from 'pages'
-
-import { customTranslation } from './i18n'
+import Layout from 'layouts/Layout'
 
 export default function App() {
   return (
-    <>
-      <Routes>
-        {navigation().map((item) => (
-          <Route key={item.title} path={item.path} element={item.element} />
-        ))}
-      </Routes>
-    </>
+    <ThemeComponent>
+      <Layout navigation={navigation} />
+    </ThemeComponent>
   )
 }
 
-export function navigation() {
+function navigation() {
   const { t } = customTranslation()
   return [
     {
       title: t('navigation.SignUp'),
-      icon: <HandymanOutlined />,
+      icon: <PersonAddAltOutlined />,
       element: <SignUp />,
       path: '/signup',
     },
     {
       title: t('navigation.SignIn'),
-      icon: <HandymanOutlined />,
+      icon: <LoginOutlined />,
       element: <SignIn />,
       path: '/signin',
     },

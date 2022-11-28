@@ -64,63 +64,95 @@ export default function Form(props: PropsForm) {
     </>
   )
   return (
-    <>
-      <Container component='main' maxWidth='xs'>
+    <Container
+      component='main'
+      maxWidth='xs'
+    >
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {!!props.header && (
+          <>
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlined />
+            </Avatar>
+            <Typography
+              component='h1'
+              variant='h5'
+            >
+              {!!namespace ? t('title') : isString(props.header) ? props.header : 'Title'}
+            </Typography>
+          </>
+        )}
         <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+          component='form'
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ mt: 3 }}
         >
-          {!!props.header && (
-            <>
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlined />
-              </Avatar>
-              <Typography component='h1' variant='h5'>
-                {!!namespace ? t('title') : isString(props.header) ? props.header : 'Title'}
-              </Typography>
-            </>
+          <Grid
+            container
+            spacing={2}
+          >
+            {childrenMap}
+          </Grid>
+          {!!props.submit && (
+            <Button
+              type='submit'
+              fullWidth
+              variant='contained'
+              sx={{ mt: 3, mb: 2 }}
+            >
+              {/* {props.submit} */}
+              {!!namespace ? t('btn_submit') : isString(props.submit) ? props.submit : 'Submit'}
+            </Button>
           )}
-          <Box component='form' noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              {childrenMap}
-            </Grid>
-            {!!props.submit && (
-              <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-                {/* {props.submit} */}
-                {!!namespace ? t('btn_submit') : isString(props.submit) ? props.submit : 'Submit'}
-              </Button>
-            )}
 
-            <Grid container>
-              <Grid item xs>
-                {props.linkl && (
-                  <Link component={RouterLink} to={props.linkl.to} variant='body2'>
-                    {props.linkl.txt}
-                  </Link>
-                )}
-              </Grid>
-              <Grid item>
-                {props.linkr && (
-                  <Link component={RouterLink} to={props.linkr.to} variant='body2'>
-                    {props.linkr.txt}
-                  </Link>
-                )}
-              </Grid>
+          <Grid container>
+            <Grid
+              item
+              xs
+            >
+              {props.linkl && (
+                <Link
+                  component={RouterLink}
+                  to={props.linkl.to}
+                  variant='body2'
+                >
+                  {props.linkl.txt}
+                </Link>
+              )}
             </Grid>
-          </Box>
+            <Grid item>
+              {props.linkr && (
+                <Link
+                  component={RouterLink}
+                  to={props.linkr.to}
+                  variant='body2'
+                >
+                  {props.linkr.txt}
+                </Link>
+              )}
+            </Grid>
+          </Grid>
         </Box>
-      </Container>
-    </>
+      </Box>
+    </Container>
   )
 }
 
 export function InputText(props: PropsInput) {
   return (
-    <Grid item xs={props.xs || 12} sm={props.sm || 6}>
+    <Grid
+      item
+      xs={props.xs || 12}
+      sm={props.sm || 6}
+    >
       <Controller
         control={props.control}
         name={props.name}
@@ -148,7 +180,11 @@ export function InputText(props: PropsInput) {
 
 export function InputPass(props: PropsInput) {
   return (
-    <Grid item xs={props.xs || 12} sm={props.sm || 6}>
+    <Grid
+      item
+      xs={props.xs || 12}
+      sm={props.sm || 6}
+    >
       <Controller
         control={props.control}
         name={props.name}
@@ -177,7 +213,10 @@ export function InputPass(props: PropsInput) {
 
 export function InputCheckbox(props: PropsInput) {
   return (
-    <Grid item xs={props.xs || 12}>
+    <Grid
+      item
+      xs={props.xs || 12}
+    >
       <Controller
         control={props.control}
         name={props.name}
@@ -204,13 +243,21 @@ export function InputCheckbox(props: PropsInput) {
 export function InputSelect(props: PropsSelect) {
   const labelId = `${props.name}-label`
   return (
-    <Grid item xs={props.xs || 12} sm={props.sm || 6}>
+    <Grid
+      item
+      xs={props.xs || 12}
+      sm={props.sm || 6}
+    >
       <Controller
         control={props.control}
         name={props.name}
         rules={{ required: props.required }}
         render={({ field: { onChange, onBlur, value, ref }, fieldState: { error } }) => (
-          <FormControl fullWidth error={!!error} required={!!props.required}>
+          <FormControl
+            fullWidth
+            error={!!error}
+            required={!!props.required}
+          >
             <InputLabel id={labelId}>{props.label}</InputLabel>
             <Select
               labelId={labelId}
