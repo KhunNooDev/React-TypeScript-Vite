@@ -4,16 +4,18 @@ import { AppBar, Box, Divider, Drawer, IconButton, Toolbar, Typography } from '@
 import Content from './Content'
 import DrawerMenu from './DrawerMenu'
 import Header from './Header'
+import { NavigationTypeArr } from 'App'
 
 const drawerWidth = 240
 
 interface Props {
   window?: () => Window
-  navigation: () => { title: string; icon?: JSX.Element; element: JSX.Element; path: string }[]
+  navigation: NavigationTypeArr
 }
 
 export default function Layout(props: Props) {
   const { window, navigation } = props
+
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleDrawerToggle = () => {
@@ -22,10 +24,7 @@ export default function Layout(props: Props) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Header
-        drawerWidth={drawerWidth}
-        handleDrawerToggle={handleDrawerToggle}
-      />
+      <Header drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
       <DrawerMenu
         window={window}
         navigation={navigation}

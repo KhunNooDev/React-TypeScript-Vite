@@ -2,12 +2,13 @@ import React from 'react'
 import { Box, Divider, Drawer, Toolbar } from '@mui/material'
 import { Home as HomeIcon } from '@mui/icons-material'
 
-import ListItemLink from 'components/MaterialUI/ListItemLink'
+import ListItemButtonLink from 'components/MaterialUI/ListItemButtonLink'
 import IconButtonLink from 'components/MaterialUI/IconButtonLink'
+import { NavigationTypeArr } from 'App'
 
 interface Props {
   window?: () => Window
-  navigation: () => { title: string; icon?: JSX.Element; element: JSX.Element; path: string }[]
+  navigation: NavigationTypeArr
   mobileOpen: boolean
   drawerWidth: number
   handleDrawerToggle: () => void
@@ -23,19 +24,18 @@ export default function DrawerMenu(props: Props) {
           to='/'
           icon={<HomeIcon />}
         /> */}
-        <ListItemLink
-          to='/'
-          primary='Home'
-          icon={<HomeIcon />}
-        />
+        <ListItemButtonLink to='/' primary='Home' icon={<HomeIcon />} />
       </Toolbar>
       {/* <Divider /> */}
-      {navigation().map((item, idx) => (
-        <ListItemLink
+      {navigation.map((item, idx) => (
+        <ListItemButtonLink
           key={idx}
           to={item.path}
           primary={item.title}
           icon={item.icon}
+          expand={item.expand}
+          subMenu={item.subMenu}
+          depth={item.depth}
         />
       ))}
     </>
@@ -44,11 +44,7 @@ export default function DrawerMenu(props: Props) {
   const container = window !== undefined ? () => window().document.body : undefined
 
   return (
-    <Box
-      component='nav'
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-      aria-label='mailbox folders'
-    >
+    <Box component='nav' sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label='mailbox folders'>
       <Drawer
         container={container}
         variant='temporary'

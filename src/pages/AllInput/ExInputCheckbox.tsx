@@ -2,7 +2,7 @@ import React from 'react'
 import Form, { InputText, InputPass, InputCheckbox, InputSelect } from 'components/TML/TMLForm'
 import { customTranslation, namespaces } from 'i18n'
 
-export const AllInput = () => {
+export const ExInputCheckbox = () => {
   const { t } = customTranslation(namespaces.pages.allinput)
 
   const onSubmit = (data: object) => console.log(data)

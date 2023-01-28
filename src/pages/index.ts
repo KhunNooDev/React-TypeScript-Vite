@@ -1,7 +1,8 @@
 export * from './HomePage'
 export * from './SignIn'
 export * from './SignUp'
-export * from './AllInput'
+export * from './AllInput/ExInputCheckbox'
+export * from './AllInput/ExInputText'
 
 /**
  * How to add new page

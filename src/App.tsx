@@ -3,18 +3,33 @@ import { HomeOutlined, PersonAddAltOutlined, LoginOutlined, DriveFileRenameOutli
 
 import ThemeComponent from 'theme/ThemeComponent'
 import { customTranslation } from 'i18n'
-import { HomePage, SignUp, SignIn, AllInput } from 'pages'
+import { HomePage, SignUp, SignIn, ExInputCheckbox, ExInputText } from 'pages'
 import Layout from 'layouts/Layout'
+import { addDepthNavigationType } from 'utils/UtilsData'
 
 export default function App() {
+  const _navigation = addDepthNavigationType(navigation())
+
   return (
     <ThemeComponent>
-      <Layout navigation={navigation} />
+      <Layout navigation={_navigation} />
     </ThemeComponent>
   )
 }
 
-function navigation() {
+export type NavigationTypeArr = NavigationType[]
+export type NavigationType = {
+  //! {element, path} or {expand, subMenu} !//
+  title: string
+  icon?: JSX.Element
+  element?: JSX.Element
+  path?: string
+  expand?: boolean
+  subMenu?: NavigationTypeArr
+  depth?: number
+}
+
+function navigation(): NavigationTypeArr {
   const { t } = customTranslation()
   return [
     {
@@ -38,8 +53,27 @@ function navigation() {
     {
       title: t('navigation.AllInput'),
       icon: <DriveFileRenameOutline />,
-      element: <AllInput />,
-      path: '/allinput',
+      expand: true,
+      subMenu: [
+        {
+          title: t('navigation.AllInput'),
+          icon: <DriveFileRenameOutline />,
+          subMenu: [
+            {
+              title: 'Ex Checkbox',
+              icon: <DriveFileRenameOutline />,
+              element: <ExInputCheckbox />,
+              path: '/ex_input_checkbox',
+            },
+          ],
+        },
+        {
+          title: 'Ex Text',
+          icon: <DriveFileRenameOutline />,
+          element: <ExInputText />,
+          path: '/ex_input_text',
+        },
+      ],
     },
   ]
 }
