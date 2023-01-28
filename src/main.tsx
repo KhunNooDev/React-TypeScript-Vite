@@ -11,15 +11,15 @@ import 'i18n'
 import App from 'App'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <React.Suspense fallback={<>Loading...</>}>
-      <Provider store={store}>
-        <HelmetProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </HelmetProvider>
-      </Provider>
-    </React.Suspense>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <React.Suspense fallback={<>Loading...</>}>
+    <Provider store={store}>
+      <HelmetProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </HelmetProvider>
+    </Provider>
+  </React.Suspense>
+  // </React.StrictMode>
 )

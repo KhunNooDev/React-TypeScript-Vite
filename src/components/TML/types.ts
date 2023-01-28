@@ -1,4 +1,4 @@
-import { GridSize, TextFieldProps } from '@mui/material'
+import { CheckboxProps, GridSize, TextFieldProps } from '@mui/material'
 import { Namespace } from 'i18next'
 import { ControllerProps, SubmitHandler } from 'react-hook-form'
 import { To } from 'react-router-dom'
@@ -34,8 +34,12 @@ export type PropsInput = {
   showClear?: boolean | string
   namespace?: Namespace
   t?: Function
+  //
+  checkSize?: number
+  //
 } & Omit<ControllerProps, 'render'> &
-  Omit<TextFieldProps, 'required'>
+  Omit<TextFieldProps, 'required'> &
+  Omit<CheckboxProps, 'required'>
 
 /**
  *

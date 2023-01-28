@@ -2,7 +2,8 @@
   "navigation": {
     "SignUp": "สมัครสมาชิก",
     "SignIn": "เข้าสู่ระบบ",
-    "Dashboard": "รายงาน"
+    "Dashboard": "รายงาน",
+    "AllInput": "ที่ป้อนข้อมูลทั้งหมด"
   },
   "buttons": {
     "ok": "ตกลง",

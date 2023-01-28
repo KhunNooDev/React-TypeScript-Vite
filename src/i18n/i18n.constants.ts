@@ -17,6 +17,7 @@ export const namespaces = {
   pages: {
     hello: 'pages.hello',
     signin: 'pages.signin',
+    allinput: 'pages.allinput',
     signup: 'pages.signup',
   },
   common: 'common',

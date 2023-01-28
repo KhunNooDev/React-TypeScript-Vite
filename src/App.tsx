@@ -1,9 +1,9 @@
 import React from 'react'
-import { HomeOutlined, PersonAddAltOutlined, LoginOutlined } from '@mui/icons-material'
+import { HomeOutlined, PersonAddAltOutlined, LoginOutlined, DriveFileRenameOutline } from '@mui/icons-material'
 
 import ThemeComponent from 'theme/ThemeComponent'
 import { customTranslation } from 'i18n'
-import { HomePage, SignUp, SignIn } from 'pages'
+import { HomePage, SignUp, SignIn, AllInput } from 'pages'
 import Layout from 'layouts/Layout'
 
 export default function App() {
@@ -34,6 +34,12 @@ function navigation() {
       icon: <HomeOutlined />,
       element: <HomePage />,
       path: '/',
+    },
+    {
+      title: t('navigation.AllInput'),
+      icon: <DriveFileRenameOutline />,
+      element: <AllInput />,
+      path: '/allinput',
     },
   ]
 }
