@@ -1,7 +1,8 @@
 import React from 'react'
-import { Box, Divider, Drawer, Toolbar } from '@mui/material'
+import { Box, Divider, Drawer, ListItemButton, ListItemText, Toolbar } from '@mui/material'
 import { Home as HomeIcon } from '@mui/icons-material'
 
+import { NavLink } from 'components/NavLink'
 import ListItemButtonLink from 'components/MaterialUI/ListItemButtonLink'
 import IconButtonLink from 'components/MaterialUI/IconButtonLink'
 import { NavigationTypeArr } from 'App'
@@ -20,11 +21,8 @@ export default function DrawerMenu(props: Props) {
   const drawer = (
     <>
       <Toolbar sx={{ justifyContent: 'center' }}>
-        {/* <IconButtonLink
-          to='/'
-          icon={<HomeIcon />}
-        /> */}
-        <ListItemButtonLink to='/' primary='Home' icon={<HomeIcon />} />
+        <IconButtonLink to='/' icon={<HomeIcon />} />
+        {/* <ListItemButtonLink to='/' primary='Home' icon={<HomeIcon />} /> */}
       </Toolbar>
       {/* <Divider /> */}
       {navigation.map((item, idx) => (

@@ -51,7 +51,7 @@ function navigation(): NavigationTypeArr {
       path: '/',
     },
     {
-      title: t('navigation.AllInput'),
+      title: t('navigation.UserInterface'),
       icon: <DriveFileRenameOutline />,
       expand: true,
       subMenu: [
@@ -65,13 +65,31 @@ function navigation(): NavigationTypeArr {
               element: <ExInputCheckbox />,
               path: '/ex_input_checkbox',
             },
+            {
+              title: 'Ex Text',
+              icon: <DriveFileRenameOutline />,
+              element: <ExInputText />,
+              path: '/ex_input_text',
+            },
           ],
         },
         {
-          title: 'Ex Text',
+          title: t('navigation.Cards'),
           icon: <DriveFileRenameOutline />,
-          element: <ExInputText />,
-          path: '/ex_input_text',
+          subMenu: [
+            {
+              title: 'Ex Checkbox',
+              icon: <DriveFileRenameOutline />,
+              element: <ExInputCheckbox />,
+              path: '/ex_input_checkbox',
+            },
+            {
+              title: 'Ex Text',
+              icon: <DriveFileRenameOutline />,
+              element: <ExInputText />,
+              path: '/ex_input_text',
+            },
+          ],
         },
       ],
     },

@@ -82,12 +82,7 @@ export default function Header(props: Props) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          variant='h6'
-          noWrap
-          component='div'
-          sx={{ flexGrow: 1, display: 'block' }}
-        >
+        <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1, display: 'block' }}>
           Responsive drawer
         </Typography>
         {
@@ -101,10 +96,7 @@ export default function Header(props: Props) {
             height: 44,
           }}
         >
-          <img
-            src={flag.icon}
-            alt={flag.label}
-          />
+          <img src={flag.icon} alt={flag.label} />
         </IconButton>
         <Popover
           open={Boolean(open)}
@@ -133,12 +125,7 @@ export default function Header(props: Props) {
                 selected={option.value === flag.value}
                 onClick={() => handleClose(option.value)}
               >
-                <Box
-                  component='img'
-                  alt={option.label}
-                  src={option.icon}
-                  sx={{ width: 28, mr: 2 }}
-                />
+                <Box component='img' alt={option.label} src={option.icon} sx={{ width: 28, mr: 2 }} />
                 {option.label}
               </MenuItem>
             ))}
@@ -147,12 +134,8 @@ export default function Header(props: Props) {
         {
           // #endregion
         }
-        <IconButton
-          sx={{ ml: 1 }}
-          onClick={() => dispatch(asyncToggleTheme())}
-          color='inherit'
-        >
-          {getDarkThemeState() ? <Brightness7Icon /> : <Brightness4Icon />}
+        <IconButton sx={{ ml: 1 }} onClick={() => dispatch(asyncToggleTheme())} color='inherit'>
+          {getDarkThemeState() ? <Brightness4Icon /> : <Brightness7Icon />}
         </IconButton>
       </Toolbar>
     </AppBar>

@@ -1,6 +1,17 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Paper, FormGroup, FormControlLabel, Switch, Typography, Link, Button, Box, Container } from '@mui/material'
+import {
+  Paper,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+  Typography,
+  Link,
+  Button,
+  Box,
+  Container,
+  Grid,
+} from '@mui/material'
 
 import { useTranslation, Trans } from 'react-i18next'
 import { Namespace } from 'i18next'
@@ -9,6 +20,7 @@ import { customTranslation, namespaces } from 'i18n'
 // get theme from store
 import { getDarkThemeState } from 'redux/selector'
 import { asyncToggleTheme } from 'redux/theme/themeSlice'
+import RecipeReviewCard from 'components/MaterialUI/RecipeReviewCard'
 
 export const HomePage = () => {
   // initialize dispatch variable
@@ -21,12 +33,7 @@ export const HomePage = () => {
     return (
       <FormGroup>
         <FormControlLabel
-          control={
-            <Switch
-              checked={getDarkThemeState()}
-              onChange={() => dispatch(asyncToggleTheme())}
-            />
-          }
+          control={<Switch checked={getDarkThemeState()} onChange={() => dispatch(asyncToggleTheme())} />}
           label='Toggle Theme'
         />
       </FormGroup>
@@ -34,10 +41,7 @@ export const HomePage = () => {
   }
 
   return (
-    <Container
-      component='main'
-      maxWidth='xs'
-    >
+    <Container component='main' /*maxWidth='xs'*/>
       <Box
         sx={{
           // marginTop: 8,
@@ -49,10 +53,7 @@ export const HomePage = () => {
         {/* <Paper className='HomePaper'> */}
         <ToggleSwitch />
         <Typography variant='h1'>Hello</Typography>
-        <Typography
-          variant='h1'
-          className='testcss'
-        >
+        <Typography variant='h1' className='testcss'>
           It's Blue
         </Typography>
         <h1>1{t('welcome')}</h1> {/*namespaces.pages.hello */}
@@ -64,6 +65,20 @@ export const HomePage = () => {
         {/* <h2>{t('buttons.ok', namespaces.pages.signin)}</h2> namespaces.signin */}
         {/* </Paper> */}
       </Box>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <RecipeReviewCard />
+        </Grid>
+        <Grid item xs={4}>
+          <RecipeReviewCard />
+        </Grid>
+        <Grid item xs={4}>
+          <RecipeReviewCard />
+        </Grid>
+        <Grid item xs={8}>
+          <RecipeReviewCard />
+        </Grid>
+      </Grid>
     </Container>
   )
 }

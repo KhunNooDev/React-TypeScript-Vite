@@ -3,7 +3,9 @@
     "SignUp": "SignUp",
     "SignIn": "SignIn",
     "Dashboard": "Dashboard",
-    "AllInput": "All Input"
+    "UserInterface": "User Interface",
+    "AllInput": "All Input",
+    "Cards": "Cards"
   },
   "buttons": {
     "ok": "Ok",

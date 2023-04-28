@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { NavLink } from 'components/NavLink'
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material'
 import { NavigationTypeArr } from 'App'
 
@@ -24,8 +24,19 @@ export default function ListItemButtonLink(props: ListItemButtonLinkProps) {
       {!props.subMenu ? (
         // no subMenu
         <>
-          <ListItemButton component={RouterLink} to={to ? to : '*'} sx={{ pl: 4 * depth }}>
-            {icon ? <ListItemIcon sx={{ minWidth: 35 }}>{icon}</ListItemIcon> : null}
+          <ListItemButton
+            component={NavLink}
+            to={to ? to : '*'}
+            end
+            activeStyle={{
+              // use theme
+              boxShadow: '0px 4px 8px -4px rgb(58 53 65 / 42%)',
+              backgroundColor: '#e7e3fc1a',
+              borderRadius: '0 100px 100px 0', //same on hover
+            }}
+            sx={{ pl: 4 * depth }}
+          >
+            {icon ? <ListItemIcon sx={{ minWidth: 35, pl: 1.5, pr: 1.5 }}>{icon}</ListItemIcon> : null}
             <ListItemText primary={primary} />
           </ListItemButton>
         </>
@@ -33,7 +44,7 @@ export default function ListItemButtonLink(props: ListItemButtonLinkProps) {
         // have subMenu
         <>
           <ListItemButton onClick={() => setOpen(!open)} sx={{ pl: 4 * depth }}>
-            {icon ? <ListItemIcon sx={{ minWidth: 35 }}>{icon}</ListItemIcon> : null}
+            {icon ? <ListItemIcon sx={{ minWidth: 35, pl: 1.5, pr: 1.5 }}>{icon}</ListItemIcon> : null}
             <ListItemText primary={primary} />
             {open ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
